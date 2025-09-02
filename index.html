@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SILENT GAMING HUB - Tournament Winners</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-blue: #0a1128;
+            --sky-blue: #00b4d8;
+            --neon-blue: #0077b6;
+            --black: #03071e;
+            --white: #f8f9fa;
+            --purple: #7209b7;
+            --glass-bg: rgba(10, 17, 40, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--black), var(--dark-blue));
+            color: var(--white);
+            min-height: 100vh;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(114, 9, 183, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 90% 70%, rgba(0, 180, 216, 0.2) 0%, transparent 20%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(45deg, var(--sky-blue), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(0, 180, 216, 0.5);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(114, 9, 183, 0.8), 0 0 30px rgba(0, 180, 216, 0.6);
+            }
+        }
+
+        .subheadline {
+            font-size: 1.2rem;
+            color: var(--sky-blue);
+            margin-bottom: 30px;
+        }
+
+        .timer-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 0 auto 40px;
+            max-width: 600px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .timer-title {
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--sky-blue);
+            font-size: 1.2rem;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .timer-unit {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 80px;
+            text-align: center;
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 180, 216, 0.3);
+        }
+
+        .timer-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--white);
+            text-shadow: 0 0 10px var(--sky-blue);
+        }
+
+        .timer-label {
+            font-size: 0.9rem;
+            color: var(--sky-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .tab {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--sky-blue);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .tab:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 180, 216, 0.4);
+            border-color: var(--sky-blue);
+        }
+
+        .tab.active {
+            background: linear-gradient(45deg, var(--neon-blue), var(--purple));
+            color: var(--white);
+            border-color: var(--purple);
+        }
+
+        .content-area {
+            position: relative;
+            min-height: 400px;
+        }
+
+        .month-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease-out;
+            position: relative;
+            display: none;
+        }
+
+        .month-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--sky-blue);
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: rotate(90deg);
+            color: var(--white);
+        }
+
+        .month-title {
+            color: var(--sky-blue);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px rgba(0, 180, 216, 0.4);
+        }
+
+        .winners-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .winners-table th {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--sky-blue);
+            font-weight: 600;
+        }
+
+        .winners-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .winners-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .winners-table tr {
+            transition: background 0.3s ease;
+        }
+
+        .winners-table tr:hover {
+            background: rgba(0, 180, 216, 0.1);
+        }
+
+        .winner-date {
+            color: var(--sky-blue);
+            font-weight: 600;
+        }
+
+        .winner-id {
+            color: var(--white);
+        }
+
+        .instagram-link {
+            color: var(--purple);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .instagram-link:hover {
+            color: var(--sky-blue);
+            text-shadow: 0 0 5px rgba(114, 9, 183, 0.5);
+        }
+
+        .prize-pool {
+            color: gold;
+            font-weight: 600;
+        }
+
+        .gameplay-rating {
+            color: var(--white);
+            display: flex;
+            gap: 3px;
+        }
+
+        .gameplay-rating i {
+            color: gold;
+        }
+
+        .coming-soon {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 2rem;
+            color: var(--sky-blue);
+            text-shadow: 0 0 10px rgba(0, 180, 216, 0.4);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .timer-unit {
+                min-width: 60px;
+                padding: 10px;
+            }
+            
+            .timer-value {
+                font-size: 1.8rem;
+            }
+            
+            .tab {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .month-content {
+                padding: 20px 15px;
+            }
+            
+            .winners-table {
+                font-size: 0.9rem;
+            }
+            
+            .winners-table th, 
+            .winners-table td {
+                padding: 10px 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .timer {
+                gap: 8px;
+            }
+            
+            .timer-unit {
+                min-width: 50px;
+                padding: 8px;
+            }
+            
+            .timer-value {
+                font-size: 1.5rem;
+            }
+            
+            .timer-label {
+                font-size: 0.7rem;
+            }
+            
+            .tabs {
+                gap: 8px;
+            }
+            
+            .tab {
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
+            
+            .winners-table {
+                font-size: 0.8rem;
+            }
+            
+            .coming-soon {
+                font-size: 1.5rem;
+                padding: 40px 15px;
+            }
+        }
+
+        /* Animation for closing */
+        @keyframes shatter {
+            0% { 
+                transform: scale(1); 
+                opacity: 1; 
+            }
+            50% {
+                transform: scale(1.05); 
+                opacity: 0.5;
+            }
+            100% { 
+                transform: scale(0); 
+                opacity: 0; 
+            }
+        }
+
+        .shatter {
+            animation: shatter 0.5s forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SILENT GAMING HUB</h1>
+            <p class="subheadline">All tournaments start on September</p>
+        </header>
+
+        <div class="timer-container">
+            <div class="timer-title">Countdown to Next Tournament</div>
+            <div class="timer">
+                <div class="timer-unit">
+                    <div class="timer-value" id="days">00</div>
+                    <div class="timer-label">Days</div>
+                </div>
+                <div class="timer-unit">
+                    <div class="timer-value" id="hours">00</div>
+                    <div class="timer-label">Hours</div>
+                </div>
+                <div class="timer-unit">
+                    <div class="timer-value" id="minutes">00</div>
+                    <div class="timer-label">Minutes</div>
+                </div>
+                <div class="timer-unit">
+                    <div class="timer-value" id="seconds">00</div>
+                    <div class="timer-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" data-month="september">September 2025</div>
+            <div class="tab" data-month="october">October 2025</div>
+            <div class="tab" data-month="november">November 2025</div>
+            <div class="tab" data-month="december">December 2025</div>
+        </div>
+
+        <div class="content-area">
+            <!-- September Content -->
+            <div class="month-content" id="september-content">
+                <div class="close-btn">
+                    <i class="fas fa-times"></i>
+                </div>
+                <h2 class="month-title">September 2025 Tournaments</h2>
+                <table class="winners-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Winner ID</th>
+                            <th>Instagram</th>
+                            <th>Prize Pool</th>
+                            <th>Gameplay Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="winner-date">September 7</td>
+                            <td class="winner-id">-</td>
+                            <td><a href="#" class="instagram-link"><i class="fab fa-instagram"></i> Winner Link</a></td>
+                            <td class="prize-pool">-</td>
+                            <td class="gameplay-rating">-</td>
+                        </tr>
+                        <tr>
+                            <td class="winner-date">September 14</td>
+                            <td class="winner-id">-</td>
+                            <td><a href="#" class="instagram-link"><i class="fab fa-instagram"></i> Winner Link</a></td>
+                            <td class="prize-pool">-</td>
+                            <td class="gameplay-rating">-</td>
+                        </tr>
+                        <tr>
+                            <td class="winner-date">September 21</td>
+                            <td class="winner-id">-</td>
+                            <td><a href="#" class="instagram-link"><i class="fab fa-instagram"></i> Winner Link</a></td>
+                            <td class="prize-pool">-</td>
+                            <td class="gameplay-rating">-</td>
+                        </tr>
+                        <tr>
+                            <td class="winner-date">September 28</td>
+                            <td class="winner-id">-</td>
+                            <td><a href="#" class="instagram-link"><i class="fab fa-instagram"></i> Winner Link</a></td>
+                            <td class="prize-pool">-</td>
+                            <td class="gameplay-rating">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- October Content -->
+            <div class="month-content" id="october-content">
+                <div class="close-btn">
+                    <i class="fas fa-times"></i>
+                </div>
+                <h2 class="month-title">October 2025 Tournaments</h2>
+                <table class="winners-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Winner ID</th>
+                            <th>Instagram</th>
+                            <th>Prize Pool</th>
+                            <th>Gameplay Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="winner-date">October 5</td>
+                            <td class="winner-id">-</td>
+                            <td><a href="#" class="instagram-link"><i class="fab fa-instagram"></i> Winner Link</a></td>
+                            <td class="prize-pool">-</td>
+                            <td class="gameplay-rating">-</td>
+                        </tr>
+                        <tr>
+                            <td class="winner-date">October 12</td>
+                            <td class="winner-id">-</td>
+                            <td><a href="#" class="instagram-link"><i class="fab fa-instagram"></i> Winner Link</a></td>
+                            <td class="prize-pool">-</td>
+                            <td class="gameplay-rating">-</td>
+                        </tr>
+                        <tr>
+                            <td class="winner-date">October 19</td>
+                            <td class="winner-id">-</td>
+                            <td><a href="#" class="instagram-link"><i class="fab fa-instagram"></i> Winner Link</a></td>
+                            <td class="prize-pool">-</td>
+                            <td class="gameplay-rating">-</td>
+                        </tr>
+                        <tr>
+                            <td class="winner-date">October 26</td>
+                            <td class="winner-id">-</td>
+                            <td><a href="#" class="instagram-link"><i class="fab fa-instagram"></i> Winner Link</a></td>
+                            <td class="prize-pool">-</td>
+                            <td class="gameplay-rating">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- November Content -->
+            <div class="month-content" id="november-content">
+                <div class="close-btn">
+                    <i class="fas fa-times"></i>
+                </div>
+                <h2 class="month-title">November 2025 Tournaments</h2>
+                <table class="winners-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Winner ID</th>
+                            <th>Instagram</th>
+                            <th>Prize Pool</th>
+                            <th>Gameplay Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="winner-date">November 2</td>
+                            <td class="winner-id">-</td>
+                            <td><a href="#" class="instagram-link"><i class="fab fa-instagram"></i> Winner Link</a></td>
+                            <td class="prize-pool">-</td>
+                            <td class="gameplay-rating">-</td>
+                        </tr>
+                        <tr>
+                            <td class="winner-date">November 9</td>
+                            <td class="winner-id">-</td>
+                            <td><a href="#" class="instagram-link"><i class="fab fa-instagram"></i> Winner Link</a></td>
+                            <td class="prize-pool">-</td>
+                            <td class="gameplay-rating">-</td>
+                        </tr>
+                        <tr>
+                            <td class="winner-date">November 16</td>
+                            <td class="winner-id">-</td>
+                            <td><a href="#" class="instagram-link"><i class="fab fa-instagram"></i> Winner Link</a></td>
+                            <td class="prize-pool">-</td>
+                            <td class="gameplay-rating">-</td>
+                        </tr>
+                        <tr>
+                            <td class="winner-date">November 23</td>
+                            <td class="winner-id">-</td>
+                            <td><a href="#" class="instagram-link"><i class="fab fa-instagram"></i> Winner Link</a></td>
+                            <td class="prize-pool">-</td>
+                            <td class="gameplay-rating">-</td>
+                        </tr>
+                        <tr>
+                            <td class="winner-date">November 30</td>
+                            <td class="winner-id">-</td>
+                            <td><a href="#" class="instagram-link"><i class="fab fa-instagram"></i> Winner Link</a></td>
+                            <td class="prize-pool">-</td>
+                            <td class="gameplay-rating">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- December Content -->
+            <div class="month-content" id="december-content">
+                <div class="close-btn">
+                    <i class="fas fa-times"></i>
+                </div>
+                <h2 class="month-title">December 2025</h2>
+                <div class="coming-soon">
+                    Coming Soon Biggest Tournament Ever Worth ₹2,00,000
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer - Fixed to always show future dates
+        function updateTimer() {
+            // Set the next tournament date (next Sunday)
+            const today = new Date();
+            const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
+            let daysUntilNextSunday = 7 - dayOfWeek;
+            
+            // If today is Sunday, show next Sunday
+            if (dayOfWeek === 0) {
+                daysUntilNextSunday = 7;
+            }
+            
+            const nextSunday = new Date();
+            nextSunday.setDate(today.getDate() + daysUntilNextSunday);
+            nextSunday.setHours(10, 0, 0, 0); // Set to 10:00 AM
+            
+            const now = new Date().getTime();
+            const distance = nextSunday - now;
+            
+            // If the next Sunday has passed, find the following Sunday
+            if (distance < 0) {
+                nextSunday.setDate(nextSunday.getDate() + 7);
+                const newDistance = nextSunday - now;
+                updateDisplay(newDistance);
+            } else {
+                updateDisplay(distance);
+            }
+        }
+        
+        function updateDisplay(distance) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Initial call and set interval
+        updateTimer();
+        setInterval(updateTimer, 1000);
+        
+        // Tab functionality - Fixed to preserve content
+        const tabs = document.querySelectorAll('.tab');
+        const monthContents = document.querySelectorAll('.month-content');
+        
+        // Initially show September content
+        document.getElementById('september-content').classList.add('active');
+        
+        // Add click event to tabs
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const month = this.getAttribute('data-month');
+                
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Show content for selected month
+                showMonthContent(month);
+            });
+        });
+        
+        // Function to show month content
+        function showMonthContent(month) {
+            // Hide all month contents
+            monthContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show the selected month content
+            const selectedContent = document.getElementById(`${month}-content`);
+            selectedContent.classList.add('active');
+        }
+        
+        // Add event listeners to close buttons
+        document.querySelectorAll('.close-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                const content = this.parentElement;
+                
+                // Apply shatter animation
+                content.classList.add('shatter');
+                
+                // After animation completes, hide the content
+                setTimeout(() => {
+                    content.classList.remove('active');
+                    content.classList.remove('shatter');
+                    
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>
